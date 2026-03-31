@@ -3,35 +3,108 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>作品 - LONGTO</title>
+<title>作品集 - LONGTO</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
 body{background:#000;color:#fff}
-.nav{display:flex;justify-content:space-between;padding:20px 40px;background:#111}
+/* 导航栏 */
+.nav{display:flex;justify-content:space-between;padding:20px 40px;background:#111;position:fixed;width:100%;top:0;z-index:100}
 .nav a{color:#fff;text-decoration:none;margin:0 15px}
-.content{padding:60px 20px;max-width:1200px;margin:0 auto}
-.title{font-size:28px;margin-bottom:30px;text-align:center}
+/* 内容区 */
+.content{padding:120px 20px 60px;max-width:1200px;margin:0 auto}
+/* 作品列表导航 */
+.work-nav{text-align:center;margin-bottom:50px}
+.work-nav a{color:#fff;text-decoration:none;margin:0 12px;font-size:16px;border-bottom:2px solid transparent;transition:border-color 0.3s}
+.work-nav a:hover{border-color:#00f0ff}
+/* 作品区块 */
+.work-item{margin-bottom:60px;padding-bottom:40px;border-bottom:1px solid #333}
+.work-item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.work-title{font-size:26px;margin-bottom:20px;text-align:center}
+/* 响应式 */
+@media (max-width:768px){
+  .nav{padding:15px 20px}
+  .nav a{margin:0 8px;font-size:13px}
+  .work-title{font-size:20px}
+  iframe{height:500px !important}
+}
 </style>
 </head>
 <body>
+<!-- 导航栏 -->
 <div class="nav">
-<div>LONGTO</div>
-<div>
-<a href=" ">首页</a >
-<a href="works.html">作品</a >
-<a href="about.html">关于</a >
+  <div>LONGTO</div>
+  <div>
+    <a href=" ">首页</a >
+    <a href="works.html">作品</a >
+    <a href="about.html">关于</a >
+  </div>
 </div>
-</div>
+
+<!-- 内容区 -->
 <div class="content">
-<h2 class="title">聚能州·商业能源综合体项目方案</h2>
-<iframe
-src="https://drive.google.com/file/d/15rU5hG_j5i9tP1gDq5HkLulHopbquxAi/preview"
-width="100%"
-height="800"
-frameborder="0"
-allowfullscreen
-style="border-radius:8px;max-width:1200px;margin:0 auto">
-</iframe>
+  <!-- 作品列表导航（点击跳转到对应作品） -->
+  <div class="work-nav">
+    <a href="#work1">聚能州项目</a >
+    <a href="#work2">源龙源站方案</a >
+    <a href="#work3">康恒路站改造</a >
+    <a href="#work4">信阳站改造</a >
+  </div>
+
+  <!-- 作品1：聚能州·商业能源综合体 -->
+  <div class="work-item" id="work1">
+    <h2 class="work-title">01 聚能州·商业能源综合体项目方案</h2>
+    <iframe 
+      src="https://drive.google.com/file/d/15rU5hG_j5i9tP1gDq5HkLulHopbquxAi/preview" 
+      width="100%" 
+      height="800" 
+      frameborder="0"
+      allowfullscreen
+      style="border-radius:8px"
+    >
+    </iframe>
+  </div>
+
+  <!-- 作品2：道达尔源龙源站方案效果 -->
+  <div class="work-item" id="work2">
+    <h2 class="work-title">02 道达尔源龙源站方案效果</h2>
+    <iframe 
+      src="https://drive.google.com/file/d/1iL36njgLtX9zj6mIsezeVq7x36xn4ZQY/preview" 
+      width="100%" 
+      height="800" 
+      frameborder="0"
+      allowfullscreen
+      style="border-radius:8px"
+    >
+    </iframe>
+  </div>
+
+  <!-- 作品3：道达尔加油站（康恒路站）改造方案效果 -->
+  <div class="work-item" id="work3">
+    <h2 class="work-title">03 道达尔康恒路站改造方案效果</h2>
+    <iframe 
+      src="https://drive.google.com/file/d/10-MnptYqMa27IK7SEvqW5sghn99_m7ZP/preview" 
+      width="100%" 
+      height="800" 
+      frameborder="0"
+      allowfullscreen
+      style="border-radius:8px"
+    >
+    </iframe>
+  </div>
+
+  <!-- 作品4：新中联加油站（信阳站）改造方案效果 -->
+  <div class="work-item" id="work4">
+    <h2 class="work-title">04 新中联信阳站改造方案效果</h2>
+    <iframe 
+      src="https://drive.google.com/file/d/1JAdmA4TNx4fz0PvDRh_HAB7dmavUBs0f/preview" 
+      width="100%" 
+      height="800" 
+      frameborder="0"
+      allowfullscreen
+      style="border-radius:8px"
+    >
+    </iframe>
+  </div>
 </div>
 </body>
 </html>
