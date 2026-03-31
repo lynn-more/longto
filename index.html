@@ -3,21 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LONGTO - 优秀设计与项目案例</title>
+    <title>LONGTO - 量度设计与项目案例</title>
     
     <!-- 引入无衬线字体 Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <style>
         /* ================= 基础变量与重置 ================= */
         :root {
-            --bg-color: #fafafa; /* 浅灰色背景，提升质感 */
-            --text-main: #111111;
-            --text-light: #666666;
+            --bg-color: #000000;
+            --text-main: #ffffff;
+            --text-muted: #888888;
+            --accent-color: #ff3c00;
             --nav-bg: rgba(250, 250, 250, 0.85);
-            --grid-gap: 3rem; /* 增大间距，体现呼吸感 */
+            --grid-gap: 3rem;
         }
 
         * {
@@ -27,404 +28,220 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
-            /* 页面加载淡入效果 */
+        }
+
+        /* 页面加载入画效果 */
+        .reveal {
             opacity: 0;
-            animation: fadeIn 1.2s ease-out forwards;
+            transform: translateY(25px);
+            animation: revealUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
+        @keyframes revealUp {
             to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* 平滑滚动 */
-        html {
-            scroll-behavior: smooth;
-            scroll-padding-top: 100px; /* 为固定导航栏留出空间 */
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
         }
 
         /* ================= 导航栏 ================= */
         header {
             position: fixed;
             top: 0;
-            left: 0;
             width: 100%;
-            height: 80px;
+            height: 90px;
             background: var(--nav-bg);
-            backdrop-filter: blur(12px); /* 毛玻璃效果 */
-            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(10px);
             z-index: 1000;
             display: flex;
             align-items: center;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .nav-container {
             width: 100%;
-            max-width: 1600px;
+            max-width: 1800px;
             margin: 0 auto;
-            padding: 0 4%;
+            padding: 0 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .logo {
-            font-size: 1.4rem;
-            font-weight: 700;
-            letter-spacing: 1px;
+            font-size: 1.6rem;
+            font-weight: 900;
+            letter-spacing: 2px;
             text-transform: uppercase;
+            color: #000;
         }
 
         .nav-links {
             display: flex;
-            gap: 2.5rem;
+            gap: 3rem;
             list-style: none;
         }
 
         .nav-links a {
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: var(--text-light);
-            transition: color 0.3s ease;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #000;
+            transition: 0.3s;
+            text-decoration: none;
         }
 
-        .nav-links a:hover {
-            color: var(--text-main);
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent-color);
         }
 
-        /* ================= 主体内容布局 ================= */
-        main {
-            padding-top: 140px;
+        /* ================= 英雄区 (Hero) ================= */
+        .hero {
             min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 5%;
+            position: relative;
         }
 
-        section {
-            max-width: 1600px;
-            margin: 0 auto 120px;
-            padding: 0 4%;
+        .hero-content {
+            max-width: 900px;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -3px;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+
+        /* ================= 作品区 (Works) ================= */
+        .works-section {
+            padding: 120px 5%;
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
         }
 
         .section-title {
-            font-size: 2rem;
-            font-weight: 600;
-            margin-bottom: 3rem;
-            letter-spacing: -0.5px;
-            border-bottom: 1px solid rgba(0,0,0,0.1);
-            padding-bottom: 1rem;
-            display: inline-block;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900;
+            letter-spacing: -1px;
+            margin-bottom: 15px;
         }
 
-        /* ================= 英雄区域 (公司简介) ================= */
-        .hero {
-            margin-top: 20px;
-            margin-bottom: 100px;
-            max-width: 900px;
-        }
-        
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            line-height: 1.15;
-            letter-spacing: -1.5px;
-            margin-bottom: 1.5rem;
+        .section-subtitle {
+            font-size: 1rem;
+            color: var(--text-muted);
         }
 
-        .hero p {
-            font-size: 1.25rem;
-            color: var(--text-light);
-            max-width: 650px;
+        /* ================= 联系区 (Contact) ================= */
+        .contact-section {
+            padding: 120px 5%;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* ================= 作品网格布局 ================= */
-        .works-grid {
-            display: grid;
-            grid-template-columns: 1fr; /* 手机端1列 */
-            gap: var(--grid-gap);
+        .contact-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 20px;
         }
 
-        /* 平板尺寸: 2列 */
-        @media (min-width: 768px) {
-            .works-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        /* 桌面尺寸: 3列 */
-        @media (min-width: 1024px) {
-            .works-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        /* 超大桌面尺寸: 4列 */
-        @media (min-width: 1440px) {
-            .works-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-
-        /* ================= 卡片设计与交互 ================= */
-        .card {
-            display: flex;
-            flex-direction: column;
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .card-img-wrapper {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 4 / 3; /* 统一封面图比例 */
-            overflow: hidden;
-            background-color: #eee;
-            margin-bottom: 1.25rem;
-            border-radius: 4px; /* 极简的微圆角 */
-        }
-
-        .card-img-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); /* 平滑过渡动画 */
-        }
-
-        /* 半透明遮罩层 */
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.2);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        /* 悬停动画 */
-        .card:hover .card-img-wrapper img {
-            transform: scale(1.05); /* 图片轻微放大 */
-        }
-
-        .card:hover .overlay {
-            opacity: 1; /* 显示遮罩 */
-        }
-
-        .card-info {
-            display: flex;
-            flex-direction: column;
-            gap: 0.4rem;
-        }
-
-        .card-title {
-            font-size: 1.15rem;
-            font-weight: 600;
-            letter-spacing: -0.3px;
-        }
-
-        .card-category {
-            font-size: 0.85rem;
-            color: var(--text-light);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-weight: 500;
-        }
-
-        /* ================= 关于我们 & 联系版块 ================= */
-        .info-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 4rem;
-        }
-
-        @media (min-width: 900px) {
-            .info-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        .text-block p {
-            font-size: 1.1rem;
-            color: var(--text-light);
-            margin-bottom: 1.5rem;
-            max-width: 600px;
-        }
-
-        .contact-email {
-            display: inline-block;
-            margin-top: 1rem;
-            font-size: 2rem;
-            font-weight: 600;
-            color: var(--text-main);
-            border-bottom: 2px solid transparent;
-            padding-bottom: 5px;
-            transition: border-color 0.3s;
-            letter-spacing: -0.5px;
-        }
-
-        .contact-email:hover {
-            border-color: var(--text-main);
+        .contact-text {
+            color: var(--text-muted);
+            margin-bottom: 40px;
         }
 
         /* ================= 页脚 ================= */
         footer {
-            max-width: 1600px;
+            padding: 60px 5%;
+            max-width: 1800px;
             margin: 0 auto;
-            padding: 2rem 4%;
-            border-top: 1px solid rgba(0, 0, 0, 0.05);
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            font-size: 0.85rem;
-            color: var(--text-light);
+            align-items: flex-end;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        @media (max-width: 600px) {
-            .hero h1 { font-size: 2.5rem; }
-            .hero p { font-size: 1.1rem; }
+        @media (max-width: 768px) {
+            footer { flex-direction: column; align-items: center; gap: 30px; text-align: center; }
             .nav-links { gap: 1.5rem; }
-            footer { flex-direction: column; gap: 1rem; text-align: center; }
         }
     </style>
 </head>
 <body>
 
-    <!-- 顶部导航栏 -->
+    <!-- 导航栏（已修复跳转） -->
     <header>
         <div class="nav-container">
-            <a href="#" class="logo">LONGTO</a>
+            <a href=" " class="logo">LONGTO</a >
             <ul class="nav-links">
-                <li><a href="#works">作品</a></li>
-                <li><a href="#about">关于</a></li>
-                <li><a href="#contact">联系</a></li>
+                <li><a href="works.html" class="active">Works</a ></li>
+                <li><a href="about.html">About</a ></li>
+                <li><a href="#contact">Contact</a ></li>
             </ul>
         </div>
     </header>
 
-    <main>
-        <!-- 英雄区域 -->
-        <section class="hero">
-            <h1>我们用设计赋能商业，<br>创造卓越的品牌体验。</h1>
-            <p>LONGTO 是一家专注于品牌视觉、交互体验与数字创新的综合性设计机构。我们与富有远见的客户合作，将复杂的问题转化为优雅的解决方案。</p>
-        </section>
+    <!-- 英雄区 -->
+    <section class="hero reveal">
+        <div class="hero-content">
+            <h1 class="hero-title">CREATING BEYOND BOUNDARIES</h1>
+            <p class="hero-subtitle">量度星球，以创意为核，为品牌打造全链路整合营销解决方案</p >
+        </div>
+    </section>
 
-        <!-- 作品列表区域 -->
-        <section id="works">
-            <h2 class="section-title">精选案例</h2>
-            
-            <div class="works-grid">
-                <!-- 项目卡片 1 -->
-                <a href="#works" class="card">
-                    <div class="card-img-wrapper">
-                        <!-- 使用高质量的占位图作为演示，可替换为真实图片 -->
-                        <img src="https://images.unsplash.com/photo-1600132806370-bf17e65e942f?auto=format&fit=crop&w=800&q=80" alt="">
-                        <div class="overlay"></div>
-                    </div>
-                    <div class="card-info">
-                        <h3 class="card-title">Lumina 咖啡品牌升级</h3>
-                        <span class="card-category">品牌设计 / 包装设计</span>
-                    </div>
-                </a>
+    <!-- 作品区入口 -->
+    <section id="works" class="works-section reveal">
+        <div class="section-header">
+            <h2 class="section-title">Selected Works</h2>
+            <p class="section-subtitle">点击下方按钮，查看完整作品集</p >
+            <a href="works.html" style="display: inline-block; margin-top: 30px; padding: 15px 40px; border: 1px solid var(--accent-color); color: var(--accent-color); text-decoration: none; font-weight: 700; transition: 0.3s;">VIEW ALL WORKS</a >
+        </div>
+    </section>
 
-                <!-- 项目卡片 2 -->
-                <a href="#works" class="card">
-                    <div class="card-img-wrapper">
-                        <img src="https://images.unsplash.com/photo-1541462608143-67571c6738dd?auto=format&fit=crop&w=800&q=80" alt="">
-                        <div class="overlay"></div>
-                    </div>
-                    <div class="card-info">
-                        <h3 class="card-title">Aero 智能家居系统</h3>
-                        <span class="card-category">UI/UX 设计 / 交互体验</span>
-                    </div>
-                </a>
-
-                <!-- 项目卡片 3 -->
-                <a href="#works" class="card">
-                    <div class="card-img-wrapper">
-                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80" alt="">
-                        <div class="overlay"></div>
-                    </div>
-                    <div class="card-info">
-                        <h3 class="card-title">Nexus 共享空间概念</h3>
-                        <span class="card-category">空间设计 / 视觉指导</span>
-                    </div>
-                </a>
-
-                <!-- 项目卡片 4 -->
-                <a href="#works" class="card">
-                    <div class="card-img-wrapper">
-                        <img src="https://images.unsplash.com/photo-1528297506728-9533d2ac3fa4?auto=format&fit=crop&w=800&q=80" alt="">
-                        <div class="overlay"></div>
-                    </div>
-                    <div class="card-info">
-                        <h3 class="card-title">Botanica 有机护肤品</h3>
-                        <span class="card-category">包装设计 / 品牌策略</span>
-                    </div>
-                </a>
-                
-                <!-- 项目卡片 5 -->
-                <a href="#works" class="card">
-                    <div class="card-img-wrapper">
-                        <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=800&q=80" alt="">
-                        <div class="overlay"></div>
-                    </div>
-                    <div class="card-info">
-                        <h3 class="card-title">Nova 科技前沿资讯网</h3>
-                        <span class="card-category">网页设计 / 前端开发</span>
-                    </div>
-                </a>
-
-                <!-- 项目卡片 6 -->
-                <a href="#works" class="card">
-                    <div class="card-img-wrapper">
-                        <img src="https://images.unsplash.com/photo-1557683316-973673baf926?auto=format&fit=crop&w=800&q=80" alt="">
-                        <div class="overlay"></div>
-                    </div>
-                    <div class="card-info">
-                        <h3 class="card-title">Vektor 抽象艺术展</h3>
-                        <span class="card-category">视觉识别 / 海报设计</span>
-                    </div>
-                </a>
-            </div>
-        </section>
-
-        <!-- 关于与联系区域 -->
-        <section class="info-grid">
-            <div id="about" class="text-block">
-                <h2 class="section-title">关于 LONGTO</h2>
-                <p>我们相信设计的力量不仅仅在于视觉的表现，更在于解决问题和创造价值。自成立以来，LONGTO 团队致力于在美学与商业目标之间寻找完美的平衡点。</p>
-                <p>无论是一个初创品牌从零到一的塑造，还是成熟企业的全面数字化转型，我们都将全程投入，打磨每一个细节。</p>
-            </div>
-
-            <div id="contact" class="text-block">
-                <h2 class="section-title">联系合作</h2>
-                <p>如果你有一个新项目需要探讨，或者仅仅是想打个招呼，欢迎随时通过邮件与我们取得联系。我们将尽快予以回复。</p>
-                <a href="mailto:hello@longto.design" class="contact-email">hello@longto.design</a>
-            </div>
-        </section>
-    </main>
+    <!-- 联系区 -->
+    <section id="contact" class="contact-section reveal">
+        <h2 class="contact-title">Get In Touch</h2>
+        <p class="contact-text">期待与您的合作，共创品牌新增长</p >
+        <p>邮箱: contact@longto.com | 微信: LONGTO-OFFICIAL</p >
+    </section>
 
     <!-- 页脚 -->
     <footer>
-        <div class="copyright">
-            &copy; 2026 LONGTO Design. All rights reserved.
+        <div>
+            &copy; 2026 LONGTO / CREATING BEYOND BOUNDARIES.
         </div>
-        <div class="social-links">
-            Instagram / Behance / Dribbble
+        <div style="text-align: right;">
+            CHONGQING, CHINA<br>
+            BEHANCE / INSTAGRAM / WECHAT
         </div>
     </footer>
 
 </body>
 </html>
-<script type="module" src="/index.tsx"></script>
