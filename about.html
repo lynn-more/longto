@@ -5,19 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About - LONGTO 量度星球</title>
     
-    <!-- 引入无衬线字体 Inter 和高质量中文字体 -->
+    <!-- 引入无衬线字体 Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
 
     <style>
-        /* ================= 品牌视觉变量 (W 风格) ================= */
+        /* ================= 品牌视觉变量 (完全致敬 W) ================= */
         :root {
-            --bg-color: #000000; /* 纯黑背景 */
-            --text-main: #ffffff; /* 纯白文字 */
-            --text-muted: #888888;
-            --accent-color: #ff3c00; /* 品牌橙 */
-            --nav-bg: rgba(0, 0, 0, 0.9);
+            --bg-color: #000000;
+            --text-main: #ffffff;
+            --text-muted: #666666;
+            --accent-color: #E60012; /* W 标志性的创造者红 */
+            --border-color: rgba(255, 255, 255, 0.15); /* 强烈的网格分割线 */
+            --nav-height: 80px;
         }
 
         * {
@@ -30,7 +31,7 @@
             font-family: 'Inter', "PingFang SC", "Microsoft YaHei", sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
-            line-height: 1.4;
+            line-height: 1.1;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
         }
@@ -38,12 +39,13 @@
         /* 进场动画 */
         .reveal {
             opacity: 0;
-            transform: translateY(30px);
-            animation: revealUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            transform: translateY(40px);
+            transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        @keyframes revealUp {
-            to { opacity: 1; transform: translateY(0); }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* ================= 导航栏 ================= */
@@ -51,29 +53,26 @@
             position: fixed;
             top: 0;
             width: 100%;
-            height: 90px;
-            background: var(--nav-bg);
-            backdrop-filter: blur(10px);
+            height: var(--nav-height);
+            background: var(--bg-color);
             z-index: 1000;
             display: flex;
             align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid var(--border-color);
         }
 
         .nav-container {
             width: 100%;
-            max-width: 1800px;
-            margin: 0 auto;
-            padding: 0 5%;
+            padding: 0 4vw;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .logo {
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             font-weight: 900;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             text-transform: uppercase;
             text-decoration: none;
             color: #fff;
@@ -81,15 +80,15 @@
 
         .nav-links {
             display: flex;
-            gap: 3rem;
+            gap: 4rem;
             list-style: none;
         }
 
         .nav-links a {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             color: var(--text-muted);
             text-decoration: none;
             transition: 0.3s;
@@ -99,51 +98,65 @@
             color: var(--text-main);
         }
 
-        /* ================= Hero 区域 ================= */
+        /* ================= Hero 区域 (巨型视觉) ================= */
         .hero {
-            padding: 220px 5% 100px;
-            max-width: 1800px;
-            margin: 0 auto;
+            padding: calc(var(--nav-height) + 120px) 4vw 80px;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .huge-title {
-            font-size: clamp(2.5rem, 10vw, 8.5rem);
+            font-size: clamp(3.5rem, 13vw, 15rem);
             font-weight: 900;
-            line-height: 1.1;
-            letter-spacing: -2px;
-            margin-bottom: 40px;
+            line-height: 0.85;
+            letter-spacing: -4px;
+            text-transform: uppercase;
+            word-break: break-word;
         }
 
         .outline-text {
             display: block;
-            -webkit-text-stroke: 1px var(--text-main);
+            -webkit-text-stroke: 1.5px var(--text-main);
             color: transparent;
-            transition: color 0.5s ease;
+            transition: 0.4s cubic-bezier(0.2, 1, 0.3, 1);
+            cursor: default;
         }
 
         .outline-text:hover {
-            color: var(--text-main);
+            color: var(--accent-color);
+            -webkit-text-stroke: 1.5px transparent;
         }
 
-        /* ================= 品牌宣言内容 ================= */
+        /* ================= 核心宣言与方法论 (网格分割) ================= */
         .manifesto-section {
-            padding: 100px 5%;
-            max-width: 1800px;
-            margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr;
-            gap: 80px;
+            border-bottom: 1px solid var(--border-color);
         }
 
         @media (min-width: 1024px) {
             .manifesto-section {
-                grid-template-columns: 1.2fr 0.8fr;
-                align-items: start;
+                grid-template-columns: 1fr 1fr;
+            }
+            .manifesto-left {
+                border-right: 1px solid var(--border-color);
             }
         }
 
+        .manifesto-block {
+            padding: 80px 4vw;
+        }
+
+        .block-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--accent-color);
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+
         .main-text {
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-size: clamp(1.8rem, 3.5vw, 3rem);
             font-weight: 700;
             line-height: 1.2;
             letter-spacing: -1px;
@@ -152,90 +165,111 @@
         .sub-text {
             font-size: 1.1rem;
             color: var(--text-muted);
-            max-width: 600px;
-            margin-top: 30px;
+            margin-top: 40px;
             line-height: 1.8;
+            max-width: 80%;
         }
 
-        .brand-concept {
-            border-left: 4px solid var(--accent-color);
-            padding-left: 30px;
+        /* 方法论列表 */
+        .method-list {
             display: flex;
             flex-direction: column;
-            gap: 40px;
         }
 
-        .concept-item h3 {
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            color: var(--accent-color);
-            margin-bottom: 15px;
-            letter-spacing: 2px;
+        .method-item {
+            padding-bottom: 60px;
+            margin-bottom: 60px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            position: relative;
         }
 
-        .concept-item p {
-            font-size: 1.2rem;
-            font-weight: 500;
+        .method-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .method-number {
+            font-size: clamp(4rem, 8vw, 6rem);
+            font-weight: 900;
+            line-height: 1;
+            color: transparent;
+            -webkit-text-stroke: 1px var(--border-color);
+            position: absolute;
+            top: -10px;
+            right: 0;
+            opacity: 0.5;
+        }
+
+        .method-item h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        .method-item p {
+            font-size: 1.1rem;
             line-height: 1.6;
+            color: var(--text-muted);
+            max-width: 85%;
         }
 
-        /* ================= 底部口号区域 ================= */
-        .creators-banner {
-            width: 100%;
-            padding: 150px 0;
+        /* ================= 结语横幅区域 ================= */
+        .banner-slogan {
+            padding: 150px 4vw;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: var(--bg-color);
         }
 
-        .slogan {
-            font-size: clamp(2rem, 6vw, 5rem);
+        .slogan-title {
+            font-size: clamp(2.5rem, 8vw, 7rem);
             font-weight: 900;
             text-transform: uppercase;
             letter-spacing: -2px;
-            margin-bottom: 40px;
+            line-height: 1;
+            margin-bottom: 50px;
         }
 
-        .highlight-accent {
+        .accent {
             color: var(--accent-color);
         }
 
-        .manifesto-footer {
+        .footer-manifesto {
             max-width: 800px;
-            margin: 0 auto;
-            padding: 0 5%;
-        }
-
-        .manifesto-footer p {
-            font-size: 1.25rem;
-            font-weight: 500;
-            line-height: 2;
+            font-size: clamp(1.2rem, 2vw, 1.8rem);
+            font-weight: 700;
+            line-height: 1.6;
+            color: var(--text-main);
         }
 
         /* ================= 页脚 ================= */
         footer {
-            padding: 60px 5%;
-            max-width: 1800px;
-            margin: 0 auto;
+            padding: 60px 4vw;
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid var(--border-color);
             color: var(--text-muted);
             font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
         }
 
         @media (max-width: 768px) {
-            .hero { padding-top: 150px; }
-            .huge-title { letter-spacing: -1px; }
-            footer { flex-direction: column; align-items: center; gap: 30px; text-align: center; }
+            .nav-links { gap: 1.5rem; }
+            .hero { padding-top: 140px; }
+            .method-number { font-size: 4rem; position: relative; display: block; margin-bottom: 20px; }
+            footer { flex-direction: column; align-items: flex-start; gap: 40px; }
+            .sub-text, .method-item p { max-width: 100%; }
         }
     </style>
 </head>
 <body>
 
-    <!-- 导航栏 -->
     <header>
         <div class="nav-container">
             <a href="works.html" class="logo">LONGTO</a>
@@ -248,20 +282,23 @@
     </header>
 
     <main>
-        <!-- Hero Section -->
+        <!-- 巨型视觉区 (带描边悬停交互) -->
         <section class="hero reveal">
             <h1 class="huge-title">
                 破界而生<br>
-                <span class="outline-text">共创意，共增长。</span>
+                <span class="outline-text">CREATING</span>
+                <span class="outline-text">GROWTH.</span>
             </h1>
         </section>
 
-        <!-- Manifesto Section -->
-        <section class="manifesto-section reveal" style="animation-delay: 0.2s;">
-            <div class="manifesto-left">
+        <!-- 核心内容网格 -->
+        <section class="manifesto-section">
+            <!-- 左侧：公司定位 -->
+            <div class="manifesto-left manifesto-block reveal">
+                <div class="block-label">Who We Are</div>
                 <div class="main-text">
-                    量度星球（LONG TO），<br>
-                    跨界新媒体营销综合体，<br>
+                    量度星球（LONG TO）<br>
+                    <span class="accent">跨界</span>新媒体营销综合体，<br>
                     诞生于重庆。
                 </div>
                 <div class="sub-text">
@@ -269,35 +306,41 @@
                 </div>
             </div>
 
-            <div class="brand-concept">
-                <div class="concept-item">
-                    <h3>Methodology / 方法论</h3>
-                    <p>通过市场洞察、内容创意与全媒体运营的深度融合，我们摒弃模板化路径，坚持以“灵感碰撞”的方式。</p>
-                </div>
-                <div class="concept-item">
-                    <h3>Integration / 嫁接</h3>
-                    <p>将传统行业需求与创新意识形态精准嫁接，为品牌量身打造既具可操作性、又富有生命力的定制化解决方案。</p>
+            <!-- 右侧：方法论 -->
+            <div class="manifesto-right manifesto-block reveal" style="transition-delay: 0.2s;">
+                <div class="block-label">How We Work</div>
+                <div class="method-list">
+                    
+                    <div class="method-item">
+                        <div class="method-number">01</div>
+                        <h3>Methodology / 灵感碰撞</h3>
+                        <p>通过市场洞察、内容创意与全媒体运营的深度融合，我们摒弃模板化路径，坚持以“灵感碰撞”的方式重塑商业表达。</p>
+                    </div>
+
+                    <div class="method-item">
+                        <div class="method-number">02</div>
+                        <h3>Integration / 破界嫁接</h3>
+                        <p>将传统行业需求与创新意识形态精准嫁接，为品牌量身打造既具可操作性、又富有生命力的定制化解决方案。</p>
+                    </div>
+
                 </div>
             </div>
         </section>
 
-        <!-- Bottom Banner Section -->
-        <section class="creators-banner reveal" style="animation-delay: 0.4s;">
-            <div class="slogan">
-                不做创意人 <br>
-                <span class="highlight-accent">只做创造者</span>
+        <!-- 底部口号 -->
+        <section class="banner-slogan reveal">
+            <div class="slogan-title">
+                不做创意人<br>
+                <span class="accent">只做创造者</span>
             </div>
-            <div class="manifesto-footer">
-                <p>
-                    我们相信，营销不止于流量，更不止于形式。<br>
-                    量度星球致力于以专业能力驱动品牌价值的持续生长——<br>
-                    <span class="highlight-accent">以洞察为始，以增长为终。</span>
-                </p>
+            <div class="footer-manifesto">
+                我们相信，营销不止于流量，更不止于形式。<br>
+                量度星球致力于以专业能力驱动品牌价值的持续生长——<br>
+                <span class="accent" style="display: block; margin-top: 20px;">以洞察为始，以增长为终。</span>
             </div>
         </section>
     </main>
 
-    <!-- 页脚 -->
     <footer>
         <div>
             &copy; 2026 LONGTO / CREATING BEYOND BOUNDARIES.
@@ -307,6 +350,27 @@
             BEHANCE / INSTAGRAM / WECHAT
         </div>
     </footer>
+
+    <script>
+        // 滚动监听器：触发 Reveal 动画
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        // 页面加载时先触发一次
+        setTimeout(() => {
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        }, 100);
+    </script>
 
 </body>
 </html>
