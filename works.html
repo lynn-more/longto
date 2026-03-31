@@ -1,110 +1,409 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>作品集 - LONGTO</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
-body{background:#000;color:#fff}
-/* 导航栏 */
-.nav{display:flex;justify-content:space-between;padding:20px 40px;background:#111;position:fixed;width:100%;top:0;z-index:100}
-.nav a{color:#fff;text-decoration:none;margin:0 15px}
-/* 内容区 */
-.content{padding:120px 20px 60px;max-width:1200px;margin:0 auto}
-/* 作品列表导航 */
-.work-nav{text-align:center;margin-bottom:50px}
-.work-nav a{color:#fff;text-decoration:none;margin:0 12px;font-size:16px;border-bottom:2px solid transparent;transition:border-color 0.3s}
-.work-nav a:hover{border-color:#00f0ff}
-/* 作品区块 */
-.work-item{margin-bottom:60px;padding-bottom:40px;border-bottom:1px solid #333}
-.work-item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
-.work-title{font-size:26px;margin-bottom:20px;text-align:center}
-/* 响应式 */
-@media (max-width:768px){
-  .nav{padding:15px 20px}
-  .nav a{margin:0 8px;font-size:13px}
-  .work-title{font-size:20px}
-  iframe{height:500px !important}
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Works - LONGTO 量度星球</title>
+    
+    <!-- 引入无衬线字体 Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* ================= 品牌视觉变量 ================= */
+        :root {
+            --bg-color: #000000;
+            --text-main: #ffffff;
+            --text-muted: #888888;
+            --accent-color: #E60012; /* 创造者红 */
+            --border-color: rgba(255, 255, 255, 0.2);
+            --nav-height: 80px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', "PingFang SC", "Microsoft YaHei", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.2;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* 进场动画 */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: revealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes revealUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ================= 导航栏 ================= */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: var(--nav-height);
+            background: var(--bg-color);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-container {
+            width: 100%;
+            padding: 0 4vw;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 4rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--text-main);
+        }
+
+        /* ================= 巨型走马灯 (Marquee) ================= */
+        .marquee-wrapper {
+            margin-top: var(--nav-height);
+            border-bottom: 1px solid var(--border-color);
+            overflow: hidden;
+            background: var(--bg-color);
+            padding: 20px 0;
+            display: flex;
+            white-space: nowrap;
+        }
+
+        .marquee-content {
+            font-size: clamp(4rem, 10vw, 8rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            line-height: 1;
+            display: flex;
+            animation: scroll 20s linear infinite;
+        }
+
+        .marquee-content span {
+            padding: 0 40px;
+            -webkit-text-stroke: 1.5px var(--text-main);
+            color: transparent;
+        }
+
+        .marquee-content span.solid {
+            color: var(--text-main);
+            -webkit-text-stroke: 0;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ================= 粗野主义作品网格 ================= */
+        .works-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        @media (min-width: 900px) {
+            .works-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .work-card {
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: inherit;
+            border-bottom: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+            transition: background-color 0.4s;
+        }
+
+        /* 去除最右侧和最底部的多余边框 */
+        @media (min-width: 900px) {
+            .work-card:nth-child(2n) { border-right: none; }
+            .work-card:nth-last-child(-n+2) { border-bottom: none; }
+        }
+        @media (max-width: 899px) {
+            .work-card { border-right: none; }
+            .work-card:last-child { border-bottom: none; }
+        }
+
+        /* 悬停时的底色反转 */
+        .work-card:hover {
+            background-color: #111;
+        }
+
+        /* 图片容器 */
+        .work-img-wrapper {
+            width: 100%;
+            aspect-ratio: 4/3;
+            overflow: hidden;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .work-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) contrast(1.2); /* 默认黑白高对比度 */
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* 图片悬停恢复色彩并轻微放大 */
+        .work-card:hover .work-img-wrapper img {
+            filter: grayscale(0%) contrast(1);
+            transform: scale(1.05);
+        }
+
+        /* 悬停时的 VIEW CASE 标签 */
+        .view-badge {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            background: var(--accent-color);
+            color: #fff;
+            padding: 12px 24px;
+            font-size: 0.85rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+        }
+
+        .work-card:hover .view-badge {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* 卡片信息区 */
+        .work-info {
+            padding: 30px 4vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex-grow: 1;
+        }
+
+        .work-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .work-cat {
+            color: var(--accent-color);
+        }
+
+        .work-year {
+            color: var(--text-muted);
+            border: 1px solid var(--text-muted);
+            padding: 4px 8px;
+            border-radius: 20px;
+        }
+
+        .work-title {
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            font-weight: 900;
+            line-height: 1.2;
+            letter-spacing: -1px;
+            margin-bottom: 15px;
+            transition: color 0.3s;
+        }
+
+        .work-card:hover .work-title {
+            color: var(--accent-color);
+        }
+
+        .work-desc {
+            font-size: 1rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* ================= 页脚 ================= */
+        footer {
+            padding: 60px 4vw;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { gap: 1.5rem; }
+            footer { flex-direction: column; align-items: flex-start; gap: 40px; }
+        }
+    </style>
 </head>
 <body>
-<!-- 导航栏 -->
-<div class="nav">
-  <div>LONGTO</div>
-  <div>
-    <a href=" ">首页</a >
-    <a href="works.html">作品</a >
-    <a href="about.html">关于</a >
-  </div>
-</div>
 
-<!-- 内容区 -->
-<div class="content">
-  <!-- 作品列表导航（点击跳转到对应作品） -->
-  <div class="work-nav">
-    <a href="#work1">聚能州项目</a >
-    <a href="#work2">源龙源站方案</a >
-    <a href="#work3">康恒路站改造</a >
-    <a href="#work4">信阳站改造</a >
-  </div>
+    <header>
+        <div class="nav-container">
+            <a href="works.html" class="logo">LONGTO</a>
+            <ul class="nav-links">
+                <li><a href="works.html" class="active">Works</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="works.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
 
-  <!-- 作品1：聚能州·商业能源综合体 -->
-  <div class="work-item" id="work1">
-    <h2 class="work-title">01 聚能州·商业能源综合体项目方案</h2>
-    <iframe 
-      src="https://drive.google.com/file/d/15rU5hG_j5i9tP1gDq5HkLulHopbquxAi/preview" 
-      width="100%" 
-      height="800" 
-      frameborder="0"
-      allowfullscreen
-      style="border-radius:8px"
-    >
-    </iframe>
-  </div>
+    <main class="reveal">
+        <!-- 走马灯标题 -->
+        <div class="marquee-wrapper">
+            <div class="marquee-content">
+                <span class="solid">SELECTED WORKS</span>
+                <span>/ LONGTO DESIGN /</span>
+                <span class="solid">SELECTED WORKS</span>
+                <span>/ LONGTO DESIGN /</span>
+                <!-- 重复内容以实现无缝滚动 -->
+                <span class="solid">SELECTED WORKS</span>
+                <span>/ LONGTO DESIGN /</span>
+                <span class="solid">SELECTED WORKS</span>
+                <span>/ LONGTO DESIGN /</span>
+            </div>
+        </div>
 
-  <!-- 作品2：道达尔源龙源站方案效果 -->
-  <div class="work-item" id="work2">
-    <h2 class="work-title">02 道达尔源龙源站方案效果</h2>
-    <iframe 
-      src="https://drive.google.com/file/d/1iL36njgLtX9zj6mIsezeVq7x36xn4ZQY/preview" 
-      width="100%" 
-      height="800" 
-      frameborder="0"
-      allowfullscreen
-      style="border-radius:8px"
-    >
-    </iframe>
-  </div>
+        <!-- 严谨网格作品区 -->
+        <div class="works-grid">
+            
+            <!-- 作品 1 -->
+            <a href="work1.html" class="work-card">
+                <div class="work-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" alt="">
+                    <div class="view-badge">View Case</div>
+                </div>
+                <div class="work-info">
+                    <div class="work-meta">
+                        <span class="work-cat">整合营销方案</span>
+                        <span class="work-year">2026</span>
+                    </div>
+                    <div>
+                        <h2 class="work-title">聚能州·商业能源综合体</h2>
+                        <p class="work-desc">基于市场洞察的商业能源品牌升级与全链路营销策略执行，打破传统能源站的空间边界。</p>
+                    </div>
+                </div>
+            </a>
 
-  <!-- 作品3：道达尔加油站（康恒路站）改造方案效果 -->
-  <div class="work-item" id="work3">
-    <h2 class="work-title">03 道达尔康恒路站改造方案效果</h2>
-    <iframe 
-      src="https://drive.google.com/file/d/10-MnptYqMa27IK7SEvqW5sghn99_m7ZP/preview" 
-      width="100%" 
-      height="800" 
-      frameborder="0"
-      allowfullscreen
-      style="border-radius:8px"
-    >
-    </iframe>
-  </div>
+            <!-- 作品 2 -->
+            <a href="work2.html" class="work-card">
+                <div class="work-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1541462608143-67571c6738dd?auto=format&fit=crop&w=1200&q=80" alt="">
+                    <div class="view-badge">View Case</div>
+                </div>
+                <div class="work-info">
+                    <div class="work-meta">
+                        <span class="work-cat">加油站改造方案</span>
+                        <span class="work-year">2025</span>
+                    </div>
+                    <div>
+                        <h2 class="work-title">道达尔源龙源站</h2>
+                        <p class="work-desc">品牌视觉与空间功能的深度融合，打造新一代能源补给站视觉标准与交互体验。</p>
+                    </div>
+                </div>
+            </a>
 
-  <!-- 作品4：新中联加油站（信阳站）改造方案效果 -->
-  <div class="work-item" id="work4">
-    <h2 class="work-title">04 新中联信阳站改造方案效果</h2>
-    <iframe 
-      src="https://drive.google.com/file/d/1JAdmA4TNx4fz0PvDRh_HAB7dmavUBs0f/preview" 
-      width="100%" 
-      height="800" 
-      frameborder="0"
-      allowfullscreen
-      style="border-radius:8px"
-    >
-    </iframe>
-  </div>
-</div>
+            <!-- 作品 3 -->
+            <a href="work3.html" class="work-card">
+                <div class="work-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80" alt="">
+                    <div class="view-badge">View Case</div>
+                </div>
+                <div class="work-info">
+                    <div class="work-meta">
+                        <span class="work-cat">加油站改造方案</span>
+                        <span class="work-year">2025</span>
+                    </div>
+                    <div>
+                        <h2 class="work-title">道达尔康恒路站</h2>
+                        <p class="work-desc">针对城市核心地段加油站的精品化升级，通过光影与材质的重构实现品牌影响力嫁接。</p>
+                    </div>
+                </div>
+            </a>
+
+            <!-- 作品 4 -->
+            <a href="work4.html" class="work-card">
+                <div class="work-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1528297506728-9533d2ac3fa4?auto=format&fit=crop&w=1200&q=80" alt="">
+                    <div class="view-badge">View Case</div>
+                </div>
+                <div class="work-info">
+                    <div class="work-meta">
+                        <span class="work-cat">加油站改造方案</span>
+                        <span class="work-year">2024</span>
+                    </div>
+                    <div>
+                        <h2 class="work-title">新中联信阳站</h2>
+                        <p class="work-desc">挖掘本土品牌生命力，通过先锋创意设计赋能传统基建行业的数字化视觉转型。</p>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+    </main>
+
+    <footer id="contact">
+        <div>
+            &copy; 2026 LONGTO / BEYOND BOUNDARIES.
+        </div>
+        <div style="text-align: right;">
+            CHONGQING, CHINA<br>
+            BEHANCE / INSTAGRAM / WECHAT
+        </div>
+    </footer>
+
 </body>
 </html>
