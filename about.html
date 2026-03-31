@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - LONGTO 量度星球</title>
+    
+    <!-- 引入无衬线字体 Inter 和高质量中文字体 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* ================= 品牌视觉变量 (W 风格) ================= */
+        :root {
+            --bg-color: #000000; /* 纯黑背景 */
+            --text-main: #ffffff; /* 纯白文字 */
+            --text-muted: #888888;
+            --accent-color: #ff3c00; /* 品牌橙 */
+            --nav-bg: rgba(0, 0, 0, 0.9);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', "PingFang SC", "Microsoft YaHei", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.4;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* 进场动画 */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: revealUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes revealUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ================= 导航栏 ================= */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 90px;
+            background: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-container {
+            width: 100%;
+            max-width: 1800px;
+            margin: 0 auto;
+            padding: 0 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--text-main);
+        }
+
+        /* ================= Hero 区域 ================= */
+        .hero {
+            padding: 220px 5% 100px;
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+
+        .huge-title {
+            font-size: clamp(2.5rem, 10vw, 8.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -2px;
+            margin-bottom: 40px;
+        }
+
+        .outline-text {
+            display: block;
+            -webkit-text-stroke: 1px var(--text-main);
+            color: transparent;
+            transition: color 0.5s ease;
+        }
+
+        .outline-text:hover {
+            color: var(--text-main);
+        }
+
+        /* ================= 品牌宣言内容 ================= */
+        .manifesto-section {
+            padding: 100px 5%;
+            max-width: 1800px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 80px;
+        }
+
+        @media (min-width: 1024px) {
+            .manifesto-section {
+                grid-template-columns: 1.2fr 0.8fr;
+                align-items: start;
+            }
+        }
+
+        .main-text {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -1px;
+        }
+
+        .sub-text {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-top: 30px;
+            line-height: 1.8;
+        }
+
+        .brand-concept {
+            border-left: 4px solid var(--accent-color);
+            padding-left: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .concept-item h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+
+        .concept-item p {
+            font-size: 1.2rem;
+            font-weight: 500;
+            line-height: 1.6;
+        }
+
+        /* ================= 底部口号区域 ================= */
+        .creators-banner {
+            width: 100%;
+            padding: 150px 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .slogan {
+            font-size: clamp(2rem, 6vw, 5rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            margin-bottom: 40px;
+        }
+
+        .highlight-accent {
+            color: var(--accent-color);
+        }
+
+        .manifesto-footer {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+
+        .manifesto-footer p {
+            font-size: 1.25rem;
+            font-weight: 500;
+            line-height: 2;
+        }
+
+        /* ================= 页脚 ================= */
+        footer {
+            padding: 60px 5%;
+            max-width: 1800px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 768px) {
+            .hero { padding-top: 150px; }
+            .huge-title { letter-spacing: -1px; }
+            footer { flex-direction: column; align-items: center; gap: 30px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 导航栏 -->
+    <header>
+        <div class="nav-container">
+            <a href="works.html" class="logo">LONGTO</a>
+            <ul class="nav-links">
+                <li><a href="works.html">Works</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="works.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero reveal">
+            <h1 class="huge-title">
+                破界而生<br>
+                <span class="outline-text">共创意，共增长。</span>
+            </h1>
+        </section>
+
+        <!-- Manifesto Section -->
+        <section class="manifesto-section reveal" style="animation-delay: 0.2s;">
+            <div class="manifesto-left">
+                <div class="main-text">
+                    量度星球（LONG TO），<br>
+                    跨界新媒体营销综合体，<br>
+                    诞生于重庆。
+                </div>
+                <div class="sub-text">
+                    我们以品牌战略为核心，创意设计为驱动，为餐饮、地产、文旅及新零售等行业客户，提供从策略策划到执行落地的全链路整合营销服务。
+                </div>
+            </div>
+
+            <div class="brand-concept">
+                <div class="concept-item">
+                    <h3>Methodology / 方法论</h3>
+                    <p>通过市场洞察、内容创意与全媒体运营的深度融合，我们摒弃模板化路径，坚持以“灵感碰撞”的方式。</p>
+                </div>
+                <div class="concept-item">
+                    <h3>Integration / 嫁接</h3>
+                    <p>将传统行业需求与创新意识形态精准嫁接，为品牌量身打造既具可操作性、又富有生命力的定制化解决方案。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom Banner Section -->
+        <section class="creators-banner reveal" style="animation-delay: 0.4s;">
+            <div class="slogan">
+                不做创意人 <br>
+                <span class="highlight-accent">只做创造者</span>
+            </div>
+            <div class="manifesto-footer">
+                <p>
+                    我们相信，营销不止于流量，更不止于形式。<br>
+                    量度星球致力于以专业能力驱动品牌价值的持续生长——<br>
+                    <span class="highlight-accent">以洞察为始，以增长为终。</span>
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer>
+        <div>
+            &copy; 2026 LONGTO / CREATING BEYOND BOUNDARIES.
+        </div>
+        <div style="text-align: right;">
+            CHONGQING, CHINA<br>
+            BEHANCE / INSTAGRAM / WECHAT
+        </div>
+    </footer>
+
+</body>
+</html>
